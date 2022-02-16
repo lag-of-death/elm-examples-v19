@@ -5167,25 +5167,9 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$application = _Browser_application;
-var $author$project$Main$Home = {$: 'Home'};
+var $elm$core$Debug$log = _Debug_log;
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$init = F3(
-	function (_v0, url, key) {
-		return _Utils_Tuple2(
-			{
-				history: _List_fromArray(
-					[url.path]),
-				key: key,
-				route: $elm$core$Maybe$Just($author$project$Main$Home)
-			},
-			$elm$core$Platform$Cmd$none);
-	});
-var $elm$json$Json$Decode$int = _Json_decodeInt;
-var $elm$core$Platform$Sub$batch = _Platform_batch;
-var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $elm$browser$Browser$Navigation$load = _Browser_load;
-var $elm$core$Debug$log = _Debug_log;
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
 		return {frag: frag, params: params, unvisited: unvisited, value: value, visited: visited};
@@ -5820,7 +5804,7 @@ var $elm$url$Url$Parser$parse = F2(
 					url.fragment,
 					$elm$core$Basics$identity)));
 	});
-var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $author$project$Main$Home = {$: 'Home'};
 var $author$project$Main$LangId = function (a) {
 	return {$: 'LangId', a: a};
 };
@@ -6051,6 +6035,28 @@ var $author$project$Main$routeParser = $elm$url$Url$Parser$oneOf(
 				$elm$url$Url$Parser$s('lang'),
 				$elm$url$Url$Parser$Query$string('search')))
 		]));
+var $elm$core$Debug$toString = _Debug_toString;
+var $author$project$Main$init = F3(
+	function (_v0, url, key) {
+		return _Utils_Tuple2(
+			{
+				history: _List_fromArray(
+					[
+						A2(
+						$elm$core$Debug$log,
+						'initial url',
+						$elm$core$Debug$toString(url))
+					]),
+				key: key,
+				route: A2($elm$url$Url$Parser$parse, $author$project$Main$routeParser, url)
+			},
+			$elm$core$Platform$Cmd$none);
+	});
+var $elm$json$Json$Decode$int = _Json_decodeInt;
+var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $elm$browser$Browser$Navigation$load = _Browser_load;
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$url$Url$addPort = F2(
 	function (maybePort, starter) {
 		if (maybePort.$ === 'Nothing') {
@@ -6099,7 +6105,8 @@ var $author$project$Main$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
 			case 'NewUrl':
-				var urlRequest = msg.a;
+				var urlReq = msg.a;
+				var urlRequest = A2($elm$core$Debug$log, 'urlRequest', urlReq);
 				if (urlRequest.$ === 'Internal') {
 					var url = urlRequest.a;
 					var maybeRoute = A2($elm$url$Url$Parser$parse, $author$project$Main$routeParser, url);
@@ -6115,6 +6122,7 @@ var $author$project$Main$update = F2(
 							$elm$url$Url$toString(url)));
 				} else {
 					var url = urlRequest.a;
+					var x = A2($elm$core$Debug$log, 'fsdfds', url);
 					return _Utils_Tuple2(
 						model,
 						$elm$browser$Browser$Navigation$load(url));
@@ -6176,7 +6184,6 @@ var $elm$html$Html$Events$onClick = function (msg) {
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$core$Debug$toString = _Debug_toString;
 var $author$project$Main$view = function (model) {
 	return {
 		body: _List_fromArray(

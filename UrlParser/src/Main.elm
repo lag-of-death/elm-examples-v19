@@ -34,7 +34,10 @@ type alias Model =
 
 init : Int -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init _ url key =
-    ( { history = [ url.path ], key = key, route = Just Home }
+    ( { history = [ Debug.log "initial url" (Debug.toString url) ]
+      , key = key
+      , route = UrlParser.parse routeParser url
+      }
     , Cmd.none
     )
 
@@ -71,7 +74,11 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NewUrl urlRequest ->
+        NewUrl urlReq ->
+            let
+                urlRequest =
+                    Debug.log "urlRequest" urlReq
+            in
             case urlRequest of
                 Internal url ->
                     let
@@ -83,6 +90,10 @@ update msg model =
                     )
 
                 External url ->
+                    let
+                        x =
+                            Debug.log "fsdfds" url
+                    in
                     ( model, Nav.load url )
 
         UrlChange location ->
