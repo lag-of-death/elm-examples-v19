@@ -6122,10 +6122,10 @@ var $author$project$Main$update = F2(
 							$elm$url$Url$toString(url)));
 				} else {
 					var url = urlRequest.a;
-					var x = A2($elm$core$Debug$log, 'fsdfds', url);
+					var urlToLoad = A2($elm$core$Debug$log, 'urlToLoad', url);
 					return _Utils_Tuple2(
 						model,
-						$elm$browser$Browser$Navigation$load(url));
+						$elm$browser$Browser$Navigation$load(urlToLoad));
 				}
 			case 'UrlChange':
 				var location = msg.a;

@@ -91,10 +91,10 @@ update msg model =
 
                 External url ->
                     let
-                        x =
-                            Debug.log "fsdfds" url
+                        urlToLoad =
+                            Debug.log "urlToLoad" url
                     in
-                    ( model, Nav.load url )
+                    ( model, Nav.load urlToLoad )
 
         UrlChange location ->
             let
