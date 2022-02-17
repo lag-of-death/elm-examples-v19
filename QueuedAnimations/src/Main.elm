@@ -7,14 +7,10 @@ import Debug
 import Html exposing (Html, button, div, img, input, p, text)
 import Html.Attributes as HA exposing (src, style)
 import Html.Events exposing (on, onClick, onInput)
-import Http exposing (Response, emptyBody)
+import Http exposing (Response(..), emptyBody)
 import Json.Decode as Json exposing (Decoder)
 import Json.Decode.Pipeline exposing (optional, required)
 import Task exposing (Task)
-
-
-
---main : Program Never Model Msg
 
 
 init : Int -> ( Model, Cmd Msg )
@@ -107,7 +103,7 @@ update message model =
         GoingRight ->
             let
                 _ =
-                    Debug.log "going right" "oh yes!"
+                    Debug.log "going right" "dummy value"
             in
             ( model, Cmd.none )
 
@@ -152,8 +148,16 @@ update message model =
 
         RunHTTPChain (Ok data) ->
             let
+                x =
+                    case data of
+                        GoodStatus_ _ body ->
+                            Debug.log "body" body
+
+                        _ ->
+                            Debug.log "DATA" (Debug.toString data)
+
                 head =
-                    List.head []
+                    List.head [ { url = "img.png", title = "", id = "0" } ]
             in
             ( { model
                 | url = .url <| Maybe.withDefault defaultPhoto head

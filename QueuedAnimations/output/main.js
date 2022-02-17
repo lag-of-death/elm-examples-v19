@@ -6290,7 +6290,7 @@ var $elm$core$Task$attempt = F2(
 						task))));
 	});
 var $author$project$Main$buildUrl = function (userId) {
-	return 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.getPhotos' + ('&api_key=<<FLICKER_API_KEY_HERE>>' + ('&user_id=' + (userId + ('&format=json' + ('&extras=url_q' + '&nojsoncallback=1'))))));
+	return 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.getPhotos' + ('&api_key=3c26566086092bc421c12cfbba2189b7' + ('&user_id=' + (userId + ('&format=json' + ('&extras=url_q' + '&nojsoncallback=1'))))));
 };
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6867,7 +6867,7 @@ var $author$project$Main$getPicturesByUID = function (userId) {
 		});
 };
 var $author$project$Main$getUserId = function (username) {
-	var url = 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.findByUsername' + ('&api_key=<<FLICKER_API_KEY_HERE>>' + ('&format=json' + ('&nojsoncallback=1' + ('&username=' + username)))));
+	var url = 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.findByUsername' + ('&api_key=3c26566086092bc421c12cfbba2189b7' + ('&format=json' + ('&nojsoncallback=1' + ('&username=' + username)))));
 	return $elm$http$Http$task(
 		{
 			body: $elm$http$Http$emptyBody,
@@ -6970,6 +6970,7 @@ var $mdgriffith$elm_style_animation$Animation$Model$To = function (a) {
 var $mdgriffith$elm_style_animation$Animation$to = function (props) {
 	return $mdgriffith$elm_style_animation$Animation$Model$To(props);
 };
+var $elm$core$Debug$toString = _Debug_toString;
 var $mdgriffith$elm_style_animation$Animation$Model$ToWith = function (a) {
 	return {$: 'ToWith', a: a};
 };
@@ -8528,7 +8529,7 @@ var $author$project$Main$update = F2(
 						{searchPhrase: phrase}),
 					$elm$core$Platform$Cmd$none);
 			case 'GoingRight':
-				var _v1 = A2($elm$core$Debug$log, 'going right', 'oh yes!');
+				var _v1 = A2($elm$core$Debug$log, 'going right', 'dummy value');
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			case 'ImageLoaded':
 				var newStyle = A2(
@@ -8584,7 +8585,22 @@ var $author$project$Main$update = F2(
 						}());
 				} else {
 					var data = message.a.a;
-					var head = $elm$core$List$head(_List_Nil);
+					var x = function () {
+						if (data.$ === 'GoodStatus_') {
+							var body = data.b;
+							return A2($elm$core$Debug$log, 'body', body);
+						} else {
+							return A2(
+								$elm$core$Debug$log,
+								'DATA',
+								$elm$core$Debug$toString(data));
+						}
+					}();
+					var head = $elm$core$List$head(
+						_List_fromArray(
+							[
+								{id: '0', title: '', url: 'img.png'}
+							]));
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -8595,9 +8611,9 @@ var $author$project$Main$update = F2(
 				}
 			case 'Animate':
 				var msg = message.a;
-				var _v3 = A2($mdgriffith$elm_style_animation$Animation$Messenger$update, msg, model.style);
-				var newStyle = _v3.a;
-				var cmds = _v3.b;
+				var _v4 = A2($mdgriffith$elm_style_animation$Animation$Messenger$update, msg, model.style);
+				var newStyle = _v4.a;
+				var cmds = _v4.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
