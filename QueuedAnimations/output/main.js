@@ -6290,7 +6290,7 @@ var $elm$core$Task$attempt = F2(
 						task))));
 	});
 var $author$project$Main$buildUrl = function (userId) {
-	return 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.getPhotos' + ('&api_key=3c26566086092bc421c12cfbba2189b7' + ('&user_id=' + (userId + ('&format=json' + ('&extras=url_q' + '&nojsoncallback=1'))))));
+	return 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.getPhotos' + ('&api_key=<<FLICKER_API_KEY_HERE>>' + ('&user_id=' + (userId + ('&format=json' + ('&extras=url_q' + '&nojsoncallback=1'))))));
 };
 var $elm$http$Http$BadStatus_ = F2(
 	function (a, b) {
@@ -6867,7 +6867,7 @@ var $author$project$Main$getPicturesByUID = function (userId) {
 		});
 };
 var $author$project$Main$getUserId = function (username) {
-	var url = 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.findByUsername' + ('&api_key=3c26566086092bc421c12cfbba2189b7' + ('&format=json' + ('&nojsoncallback=1' + ('&username=' + username)))));
+	var url = 'https://api.flickr.com/services/rest/' + ('?method=flickr.people.findByUsername' + ('&api_key=<<FLICKER_API_KEY_HERE>>' + ('&format=json' + ('&nojsoncallback=1' + ('&username=' + username)))));
 	return $elm$http$Http$task(
 		{
 			body: $elm$http$Http$emptyBody,
